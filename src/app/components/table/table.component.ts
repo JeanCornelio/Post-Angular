@@ -21,7 +21,7 @@ export class TableComponent implements OnInit, AfterViewChecked{
                private readonly fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.formCategory = this.initForm();
+    
   }
 
  ngAfterViewChecked(): void {
@@ -31,12 +31,6 @@ export class TableComponent implements OnInit, AfterViewChecked{
  }
 
 
- initForm(): FormGroup{
-  //Declare propierties form
- return  this.fb.group({
-  category: []
-  })
-}
 
 
   deleteCategory(id: string){
@@ -46,20 +40,7 @@ export class TableComponent implements OnInit, AfterViewChecked{
     this.editCategoryId.emit(category);
   }
 
-  selectionCategory(category:Category){
-   
-   let obj = this.categorySelectedGroup.find((x:any) => x === category)
 
-   if(obj !== undefined){
-    let index = this.categorySelectedGroup.indexOf(obj)
-    this.categorySelectedGroup.splice(index,1);
-   }else{
-    this.categorySelectedGroup.push(category)
-   }
-
-   
-console.log(this.categorySelectedGroup)
-  }
 
 
 }

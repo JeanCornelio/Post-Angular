@@ -41,8 +41,10 @@ export class PostModalComponent implements OnInit {
   
   serchCategories(){
     this.dialog.open(CategorySelectedModalComponent,{
-      width:"50%"
+      width:"25%",
+      data:this.categorySelected
     }).afterClosed().subscribe((result)=>{
+      if(!result) return
       this.categorySelected = result.category;
     })
   }
@@ -57,25 +59,26 @@ export class PostModalComponent implements OnInit {
       title,
       categories
     }
-
-
+ 
     if(this.data.post !==undefined){
-      this.postService.postPostCategoryList(post).subscribe(()=>{
-      
-      })
+     this.postService.updatePostCategoryList( this.data.post._id, post).subscribe(()=>{
+      this.dialogRef.close();
+      }) 
+    
     }else{
       this.postService.postPostCategoryList(post).subscribe(()=>{
-      
+        this.dialogRef.close();
       })
     }
     
   
 
+
    
 
 
 
-    this.dialogRef.close();
+  
   }
 
   validateForm(){

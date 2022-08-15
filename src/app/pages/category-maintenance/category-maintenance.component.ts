@@ -13,7 +13,7 @@ import { CategoryService } from 'src/app/service/category.service';
 export class CategoryMaintenanceComponent implements OnInit {
   categories:Category[]=[];
   constructor(private srvCategory : CategoryService,
-              public dialog: MatDialog ) { }
+              public dialog: MatDialog, ) { }
 
   ngOnInit(): void {
     this.getCategories();

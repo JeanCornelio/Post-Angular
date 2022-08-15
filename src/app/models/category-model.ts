@@ -4,7 +4,8 @@ export interface Category{
     createdAt: string,
     name: string,
     posts: Posts[],
-    updatedAt: string
+    updatedAt: string,
+    checked: boolean
 }
 
 export interface CategoryPost{

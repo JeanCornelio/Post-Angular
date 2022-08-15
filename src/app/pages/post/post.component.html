@@ -10,9 +10,9 @@
             </div>
             <div class="team-card-custom d-flex flex-column" *ngFor="let postCategory of postCategoryLis let i = index">
                 <div class="row justify-content-end mt-2">
-                    <div class="col-3 mx-1 ">
-                        <button class="btn btn-warning me-1 p-0"><i class="las la-edit text-white fs-5" (click)="updatePost(postCategory)"></i></button>
-                        <button class="btn btn-danger p-0"><i class="las la-trash fs-5" (click)="deletePost(postCategory._id)"></i></button>
+                    <div class="col-4 mx-1 ">
+                        <button class="btn btn-custom btn-warning me-1 p-0" (click)="updatePost(postCategory)" ngbTooltip="Tooltip on top"><i class="las la-edit text-white fs-5"></i></button>
+                        <button class="btn btn-custom btn-danger p-0" (click)="deletePost(postCategory._id)"><i class="las la-trash fs-5"></i></button>
                     </div>
                 </div>
                 <div class="row align-self-center mt-auto">

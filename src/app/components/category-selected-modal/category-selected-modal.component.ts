@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { elementAt } from 'rxjs';
 import { Category } from 'src/app/models/category-model';
 import { CategoryService } from 'src/app/service/category.service';
 
@@ -10,22 +11,36 @@ import { CategoryService } from 'src/app/service/category.service';
 })
 export class CategorySelectedModalComponent implements OnInit {
   categories:Category[]=[]
-  categorySelected:Category[]=[];
+  categorySelected:any[]=[];
   disabled= true;
+  
   constructor( public dialogRef: MatDialogRef<CategorySelectedModalComponent>,
-               private categoryService: CategoryService ) { }
+               private categoryService: CategoryService,
+               @Inject(MAT_DIALOG_DATA) public data:any ) { }
 
   ngOnInit(): void {
     this.getCategories();
+   
+
   }
 
   getCategories(){
     this.categoryService.getCategories().subscribe({
-      
       next:(res)=>{
-        
         this.categories = res;
-      
+        if(this.data !==undefined){
+          this.data.forEach((element:any)=>{
+              this.categorySelected.push(element)
+          })
+          this.categories.forEach((el:any)=>{
+            this.categorySelected.forEach((element:any)=>{
+              if(el._id === element._id){
+                el.checked = true;
+              }
+            })
+          })
+        }
+     
       },
 
       error:(err)=>{
@@ -39,9 +54,9 @@ export class CategorySelectedModalComponent implements OnInit {
   }
 
   setSelectedCategory(cate:Category){
-    
-    let searchCategory = this.categorySelected.find(el => el === cate)
 
+    let searchCategory = this.categorySelected.find((el:any) => el._id === cate._id)
+   
     if(searchCategory !== undefined){
     
       let indexOf = this.categorySelected.indexOf(searchCategory)
@@ -53,9 +68,10 @@ export class CategorySelectedModalComponent implements OnInit {
       this.categorySelected.push(cate);
 
     }
-    console.log(this.categorySelected)
-
+    
     if(this.categorySelected.length !== 0 ){
+      this.disabled = false;
+    }else if (this.data != undefined){
       this.disabled = false;
     }else{
       this.disabled = true;

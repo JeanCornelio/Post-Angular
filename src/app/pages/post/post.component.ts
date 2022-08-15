@@ -23,10 +23,7 @@ export class PostComponent implements OnInit {
     this.categoryListPost.getPostCategoryList().subscribe({
       next:(res)=>{
         this.postCategoryLis = res;
-        this.postCategoryLis.forEach((element:any, index:any) => {
-          
-        });
-        console.log(this.postCategoryLis)
+        console.log("lol")
       },
       error:(err)=>{
 
@@ -37,12 +34,13 @@ export class PostComponent implements OnInit {
 
   addPostOpenModal(){
     this.dialog.open(PostModalComponent,{
+      width:"23%",
       data:{
         title:0
       }
     }).afterClosed().subscribe(()=>{
       this.getPostCategoryList();
-      console.log("lol")
+     
     })
   }
 
@@ -64,8 +62,7 @@ export class PostComponent implements OnInit {
         title:1
       }
     }).afterClosed().subscribe(()=>{
-      this.getPostCategoryList();
-      console.log("lol")
+    this.getPostCategoryList();
     })
   }
 

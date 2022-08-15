@@ -1,17 +1,18 @@
 <h2 mat-dialog-title>List of Categories</h2>
+<mat-dialog-content class="mat-typography employee-modal-content">
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>  
+                <th>Select</th>
                 <th>No.</th>
                 <th>Name</th>
-
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let category of categories let i = index">
                 <td>
-                    <input class="form-check-input" type="checkbox" (click)="setSelectedCategory(category)">
+                    <input class="form-check-input" type="checkbox" [checked]="category?.checked" (click)="setSelectedCategory(category)" >
                 </td>
                 <td>{{i+1}}</td>
                 <td>{{category.name}}</td>
@@ -19,8 +20,9 @@
           </tbody>
     </table>
 </div>
-<mat-dialog-actions>
-    <button mat-button (click)="save()" [disabled]="disabled">Save</button>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end px-2">
+    <button mat-button (click)="save()"  class="mx-2 btn btn-success" [disabled]="disabled">Save</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button (click)="close()" class="btn btn-danger">Cancel</button>
   </mat-dialog-actions>

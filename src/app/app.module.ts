@@ -19,6 +19,7 @@ import { PostComponent } from './pages/post/post.component';
 import { NavComponent } from './components/nav/nav.component';
 import { CategorySelectedModalComponent } from './components/category-selected-modal/category-selected-modal.component';
 import { PostModalComponent } from './pages/post/post-modal/post-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PostModalComponent } from './pages/post/post-modal/post-modal.component
     ReactiveFormsModule,
     MatInputModule,
     FormsModule,
+    NgbModule
  
   ],
   providers: [],

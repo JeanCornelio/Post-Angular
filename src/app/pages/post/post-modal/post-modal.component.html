@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{data.title === 0? 'Add Post': 'Edit Post'}}</h2>
+<mat-dialog-content class="mat-typography employee-modal-content">
+    <form class="row p-3" [formGroup]="postForm">
+        <div class="col-md-12 mb-3 ">
+            <mat-form-field class="" appearance="fill">
+                <mat-label>Post</mat-label>
+                <input matInput placeholder="Write your title" formControlName="title">
+            </mat-form-field>
+            <div *ngIf="postForm.get('title')?.touched && postForm.get('title')?.errors?.['required']"
+                class="text-danger">
+                this fieeld is required.
+            </div>
+            <div *ngIf="postForm.get('title')?.touched && postForm.get('title')?.errors?.['minlength']"
+                class="text-danger">
+                First Name must be longer than 3 character.
+            </div>
+        </div>
+        <div class=" mb-5" *ngIf="categorySelected.length !== 0">
+            <div class="p-3 border border rounded ">
+                <p class="text-primary mb-3 ">Categories Selected</p>
+                <span class=" text-category me-1 rounded p-1" *ngFor="let category of categorySelected">{{category.name}}</span>
+            </div>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary border w-100" (click)="serchCategories()">
+                <i class="las la-layer-group fs-4 me-1"></i>Add Categories
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end px-2">
+    <button mat-button (click)="save()" [disabled]="postForm.invalid" class="mx-2 btn btn-success">{{data.title === 0? 'Add': 'Edit'}}</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button (click)="close()" class="btn btn-danger">Cancel</button>
+</mat-dialog-actions>

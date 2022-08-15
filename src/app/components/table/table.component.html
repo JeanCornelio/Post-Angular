@@ -1,0 +1,23 @@
+<div class="table-responsive table-scroll border ">
+    <table class="table table-striped">
+        <thead class="table-primary table-light">
+            <tr class="align-middle">
+                <th class="text-center">No.</th>
+                <th>Category</th>
+                <th class="text-center">Creation Date</th>
+                <th class="text-center">Acction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of data let i = index">
+                <td class="text-center">{{i+1}}</td>
+                <td>{{category.name}}</td>
+                <td class="text-center">{{category.createdAt |date: 'short': 'IST'}}</td>
+                <td class="text-center">
+                    <button class="btn btn-custom btn-warning mx-1" (click)="editCategory(category)"><i class="las la-edit text-white fs-5"></i></button>
+                    <button class="btn btn-custom btn-danger mx-1" (click)="deleteCategory(category._id)"><i class="las la-trash fs-5"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{data.category === null? 'Add Category':'Edit Category'}}</h2>
+<mat-dialog-content class="mat-typography employee-modal-content">
+    <form class="row p-3" [formGroup]="userForm">
+        <div class="col-md-12  mb-3">
+            <mat-form-field class="" appearance="fill">
+                <mat-label>Name Category</mat-label>
+                <input matInput placeholder="Write Name" formControlName="name">
+            </mat-form-field>
+            <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['required']"
+                class="text-danger"> this field is required.</div>
+            <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['minlength']"
+                class="text-danger">First Name must be longer than
+                {{userForm.get('name')?.errors?.['minlength']?.requiredLength}} character.</div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end px-2">
+    <button mat-button mat-dialog-close [disabled]="userForm.invalid" type="submit" class="mx-2 btn btn-success" (click)="onSubmit()">{{data.category
+        === null? 'Add':'Edit'}}</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button (click)="close()" class="btn btn-danger">Cancel</button>
+</mat-dialog-actions>
